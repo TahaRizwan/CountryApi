@@ -1,0 +1,76 @@
+:root {
+  /* (Light Mode Text) */
+  --text: hsl(200, 15%, 8%);
+  /* (Light Mode Input) */
+  --Dark-Gray: hsl(0, 0%, 52%);
+  /* (Light Mode Background) */
+  --Bacground: hsl(0, 0%, 98%);
+
+  --Element: hsl(0, 0%, 100%);
+}
+
+.theme {
+  /* (Dark Mode Elements) */
+  --Element: hsl(209, 23%, 22%);
+  /* (Dark Mode Background) */
+  --Bacground: hsl(207, 26%, 17%);
+  /*  (Dark Mode Text & Light Mode Elements) */
+  --text: hsl(0, 0%, 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--Bacground);
+  color: var(--text);
+}
+
+input {
+  background-color: var(--Element);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.gray {
+  background-color: var(--Element) !important;
+  color: var(--text) !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+ul.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list {
+  background-color: var(--Element) !important;
+  color: var(--text) !important;
+}
+
+input.MuiInputBase-input.css-yz9k0d-MuiInputBase-input {
+  width: 100% !important;
+}
+
+.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-4.gray.css-yxlk22-MuiGrid-root {
+  border-radius: 5px;
+}
+
+.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-2.gray.css-1np6czv-MuiGrid-root {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+@media (min-width: 0px) {
+  .css-1np6czv-MuiGrid-root {
+    margin: 0;
+  }
+}
+
+.fs-1 {
+  font-size: large !important;
+}
