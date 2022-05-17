@@ -11,7 +11,7 @@ import { InputLabel } from '@mui/material'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
-import { CircularProgress } from '@mui/material'
+import { Skeleton } from '@mui/material'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -72,6 +72,8 @@ const Home = () => {
 
   const noCountries = countries.status || countries.message
 
+  const [loading, setLoading] = useState(true)
+
   const SearchByRegion = (value) => {
     if (value) {
       const fetchRegion = async () => {
@@ -88,7 +90,7 @@ const Home = () => {
           }
           return
         }
-
+        setName('')
         setCountries(data)
       }
       try {
@@ -127,16 +129,18 @@ const Home = () => {
     if (data.status === 404) {
       setCountries([])
     }
+
     setCountries(data)
   }
   // Make a request for a user with a given ID
   useEffect(() => {
     try {
       fetchData()
+      setLoading(!loading)
     } catch (error) {
       console.log(error)
     }
-  }, [])
+  }, [loading])
 
   return (
     <>
@@ -286,17 +290,14 @@ const Home = () => {
           ) : (
             <p>No countries.......</p>
           )}
-          {!countries && (
-            <Grid
-              sx={{
-                width: '100vw',
-                height: '100vh',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <CircularProgress />
+          {loading && (
+            <Grid item sx={{ width: '100vw' }}>
+              <Skeleton />
+              <Skeleton animation='wave' />
+              <Skeleton animation='wave' />
+              <Skeleton animation='wave' />
+              <Skeleton animation='wave' />
+              <Skeleton animation={true} />
             </Grid>
           )}
         </Grid>

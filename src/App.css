@@ -5,7 +5,6 @@
   --Dark-Gray: hsl(0, 0%, 52%);
   /* (Light Mode Background) */
   --Bacground: hsl(0, 0%, 98%);
-
   --Element: hsl(0, 0%, 100%);
 }
 
@@ -28,6 +27,8 @@ body {
   background-color: var(--Bacground);
   color: var(--text);
 }
+
+
 
 input {
   background-color: var(--Element);

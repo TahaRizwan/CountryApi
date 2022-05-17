@@ -18,7 +18,8 @@ const DetailPage = () => {
   const [country, setCountry] = useState([])
   let { name } = useParams()
   const hasFetchedData = useRef(false)
-
+  const [value, setValue] = useState(name)
+  const [country1, setCountry1] = useState('')
   const [status, setStatus] = useState(false)
 
   const history = useNavigate()
@@ -27,7 +28,7 @@ const DetailPage = () => {
     if (!hasFetchedData.current) {
       const getData = async () => {
         const response = await fetch(
-          `https://restcountries.com/v3.1/name/${name}`
+          `https://restcountries.com/v3.1/name/${value}`
         )
         const data = await response.json()
 
@@ -35,12 +36,30 @@ const DetailPage = () => {
           setCountry([])
         }
         setCountry(data)
+        getName(data[0].borders)
         setStatus(!status)
       }
       getData()
       hasFetchedData.current = true
     }
-  }, [name, status])
+  }, [value, status, country])
+
+  function getName(val) {
+    let arr = []
+    val.forEach((country, index) => {
+      fetch('https://restcountries.com/v3.1/alpha/' + country)
+        .then((res) => res.json())
+        .then((data) => {
+          arr[index] = data[0].name.common
+        })
+    })
+
+    setTimeout(a, 500)
+    function a() {
+      setCountry1(arr)
+    }
+  }
+
   return (
     <>
       {!status && (
@@ -266,8 +285,14 @@ const DetailPage = () => {
                         marginX: '1rem',
                         paddingX: '1.5rem',
                       }}
+                      onClick={() => {
+                        hasFetchedData.current = false
+                        setStatus(!status)
+                        setValue(country1[0])
+                        history('/detail/' + country1[0])
+                      }}
                     >
-                      {country[0].borders[0]}
+                      {country1[0]}
                     </Paper>
                     <Paper
                       className='gray'
@@ -276,8 +301,14 @@ const DetailPage = () => {
                         marginX: '1rem',
                         paddingX: '1.5rem',
                       }}
+                      onClick={() => {
+                        hasFetchedData.current = false
+                        setStatus(!status)
+                        setValue(country1[1])
+                        history('/detail/' + country1[1])
+                      }}
                     >
-                      {country[0].borders[1]}
+                      {country1[1]}
                     </Paper>
                     <Paper
                       className='gray'
@@ -286,8 +317,14 @@ const DetailPage = () => {
                         marginX: '1rem',
                         paddingX: '1.5rem',
                       }}
+                      onClick={() => {
+                        hasFetchedData.current = false
+                        setStatus(!status)
+                        setValue(country1[2])
+                        history('/detail/' + country1[2])
+                      }}
                     >
-                      {country[0].borders[2]}
+                      {country1[2]}
                     </Paper>
                   </Box>
                 </Grid>
